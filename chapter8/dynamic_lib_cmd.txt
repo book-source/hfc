@@ -1,0 +1,5 @@
+gcc -fPIC -I ./includes/ -shared hfcal.c -o libs/libhfcal.so
+gcc elliptical.o -L ./libs -lhfcal -o elliptical
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./libs
+./elliptical 
+
