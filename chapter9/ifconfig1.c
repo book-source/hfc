@@ -6,9 +6,10 @@
 int
 main()
 {
-  if(execl("/sbin/ifconfig", "/sbin/ifconfig", NULL) == -1){
+  if(execl("/sbins/ifconfig", "/sbin/ifconfig", NULL) == -1){
     if(execlp("ipconfig", "ipconfig", NULL) == -1){
       fprintf(stderr, "Cannot run ipconfig: %s\n", strerror(errno));
+      fprintf(stderr, "Cannot run ipconfig: %d\n", errno);
       return 1;
     }
   }
