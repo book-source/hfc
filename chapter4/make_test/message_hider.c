@@ -1,15 +1,15 @@
 #include<stdio.h>
 #include "encrypt.h"
 
-int
-main () {
+int main ()
+{
   char msg[80];
   while (fgets (msg, 80, stdin))
     {
       encrypt (msg);
-      printf ("%s\n", msg);
+      printf ("after encrypt:%s\n", msg);
       encrypt (msg);
-      printf ("%s", msg);
+      printf ("after decrypt:%s", msg);
       printf ("------------line---------\n");
     }
 }
