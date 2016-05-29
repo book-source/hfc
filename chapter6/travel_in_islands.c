@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <string.h>
+//
+// basic function ok, still confused!
 typedef struct island{
     char *name;
     char *opens;
@@ -10,17 +12,46 @@ typedef struct island{
 
 island* create(char *name){
     island *i = malloc(sizeof(island));
+    i->name = strdup(name);
     i->opens = "09:00";
     i->closes = "17:00";
     i->next = NULL;
     return i;
 }
 
- 
+void release(island *start){
+    island *i = start;
+    island *next = NULL;
+    for(; i != NULL; i = next){
+        next = i->next;
+        free(i->name);
+        free(i);
+    }
+}
+
+void display(island *start) {
+    while(start){
+        printf("name:%s, opens:%s\n", start->name, start->opens);
+        start = start->next;
+    }
+}
 
 int main(){
-    char *i_name = "totyo";
-    island *i = create(i_name);
-    printf("%s\n", i->opens);
-    return 0;
+    island *start = NULL;
+    island *i = NULL;
+    island *next = NULL;
+    char name[80];
+    for(; fgets(name, 80, stdin) != NULL; i=next ) {
+        next = create(name);
+        if(start == NULL) {
+            start = next;
+        }
+        if(i != NULL){
+            i->next = next;
+        }
+    }   
+    
+    display(start); 
+    release(start);
 }
+
