@@ -1,0 +1,10 @@
+all: elliptical
+
+elliptical.o: elliptical.c
+	gcc -c elliptical.c -Iincludes
+libhfcal.so: hfcal.c
+	gcc -fPIC -shared -I./includes hfcal_UK.c -o libs/libhfcal.so 
+elliptical: elliptical.o libhfcal.so
+	gcc -L ./libs -lhfcal elliptical.o -o elliptical
+clean:
+	rm *.o libs/*.so elliptical

@@ -1,0 +1,13 @@
+# list
+nm lib*.a
+
+# list
+ar -t lib*.a
+
+# extract
+ar -x 
+
+# tar 
+ar -rcs 
+
+

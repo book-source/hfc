@@ -1,0 +1,17 @@
+# see makefile
+
+# create libhfsecutiry.a
+ar -rcs libhfsecurity.a encrypt.o checksum.o
+
+# compile
+gcc -c encrypt.c
+gcc -c checksum.c
+
+# compile test_code
+## use .c file
+gcc -o test_code test_code.c encrypt.c checksum.c
+## or use .o file
+gcc -o test_code test_code.c encrypt.o checksum.o
+
+# view .a file
+nm libhfsecutiry.a

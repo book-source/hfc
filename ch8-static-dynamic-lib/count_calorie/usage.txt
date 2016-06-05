@@ -1,0 +1,49 @@
+
+// create .so
+gcc -fPIC -shared -I./includes hfcal.c -o ./libs/libhfcal.so
+
+// create exe
+gcc elliptical.o -L./libs -lhfcal -o elliptical
+
+// if .a(static lib) and .so(dynamiic lib) exists at the same time, gcc will use .so first.
+
+
+
+// use static lib
+ar -rcs  libs/libhfcal.a hfcal.o
+gcc elliptical.o -L./libs -lhfcal -o elliptical
+
+
+// use dynamic lib, us version libhfcal
+gcc -fPIC -shared -I./includes hfcal.c -o ./libs/libhfcal.so
+gcc -o elliptical.o -Iincludes -c elliptical.c
+// caution! .o file must be at first
+gcc elliptical.o -L./libs -lhfcal -o elliptical
+
+
+// add lib path, when use dymanic lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/hfc/chapter8/count_calorie/libs/
+vim .bash_profile
+
+// use dynamic lib, uk version libhfcal
+gcc -fPIC -shared -I ./includes/ hfcal_UK.c -o libs/libhfcal.so
+
+// compile us version so
+make -f makefile
+
+// compile uk version so
+make -f makefile.uk
+
+
+// if you use -static params, you must have a libc.a file in /usr/lib64/libc.a
+// if you use dynamic compile(default way), you should have file libc.so.6 /lib64/
+
+
+localhost count_calorie]$ ldd elliptical
+    linux-vdso.so.1 =>  (0x00007fff5b3fe000)
+    libhfcal.so => not found
+    libc.so.6 => /lib64/libc.so.6 (0x00007f9547eb1000)
+    /lib64/ld-linux-x86-64.so.2 (0x00007f954827a000)
+
+
+// what is linux-vdso.so.1 and /lib64/ld-linux-x86-64.so.2
