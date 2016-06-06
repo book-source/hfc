@@ -14,6 +14,7 @@ int main(){
   char cmd[120];
   fgets(comment, 80, stdin);
   sprintf(cmd, "echo '%s %s' >> reports.log", comment, now());
+  printf("%s\n",cmd);
   system(cmd);
   return 0;
 }
