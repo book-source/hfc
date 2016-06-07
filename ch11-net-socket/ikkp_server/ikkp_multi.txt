@@ -1,0 +1,23 @@
+// when you start ikkp_server_multi_process.c, and open 3 telnet to the server.
+// client command:  telnet 127.0.0.1 3000
+// you will see the socket connceted.
+
+[larry@bogon hfc]$ netstat -antp | grep 30000
+(Not all processes could be identified, non-owned process info
+ will not be shown, you would have to be root to see it all.)
+tcp        0      0 0.0.0.0:30000           0.0.0.0:*               LISTEN      20654/./a.out
+tcp        0      0 127.0.0.1:45683         127.0.0.1:30000         ESTABLISHED 20665/telnet
+tcp        0      0 127.0.0.1:30000         127.0.0.1:45683         ESTABLISHED 20666/./a.out
+tcp        0      0 127.0.0.1:30000         127.0.0.1:45684         ESTABLISHED 20668/./a.out
+tcp        0      0 127.0.0.1:30000         127.0.0.1:45686         ESTABLISHED 20781/./a.out
+tcp        0      0 127.0.0.1:45686         127.0.0.1:30000         ESTABLISHED 20780/telnet
+tcp        0      0 127.0.0.1:45684         127.0.0.1:30000         ESTABLISHED 20667/telnet
+[larry@bogon hfc]$ lsof  -i -n -P
+COMMAND   PID  USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+a.out   20654 larry    3u  IPv4 312928      0t0  TCP *:30000 (LISTEN)
+telnet  20665 larry    3u  IPv4 312954      0t0  TCP 127.0.0.1:45683->127.0.0.1:30000 (ESTABLISHED)
+a.out   20666 larry    4u  IPv4 312951      0t0  TCP 127.0.0.1:30000->127.0.0.1:45683 (ESTABLISHED)
+telnet  20667 larry    3u  IPv4 312958      0t0  TCP 127.0.0.1:45684->127.0.0.1:30000 (ESTABLISHED)
+a.out   20668 larry    4u  IPv4 312955      0t0  TCP 127.0.0.1:30000->127.0.0.1:45684 (ESTABLISHED)
+telnet  20780 larry    3u  IPv4 314515      0t0  TCP 127.0.0.1:45686->127.0.0.1:30000 (ESTABLISHED)
+a.out   20781 larry    4u  IPv4 312959      0t0  TCP 127.0.0.1:30000->127.0.0.1:45686 (ESTABLISHED)

@@ -1,0 +1,9 @@
+BLAB
+
+create socket
+
+B bind, bind socket to address.
+L listen, one line.
+A accept
+B start communicate
+

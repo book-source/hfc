@@ -7,6 +7,14 @@
 #include<unistd.h>
 #include<netdb.h>
 
+
+void error(char *msg)
+{
+  fprintf(stderr, "%s: %s\n", msg, strerror(errno));
+  exit(1);
+}
+
+
 int
 main (int argc, char *argv[])
 {
@@ -19,6 +27,15 @@ main (int argc, char *argv[])
   };
   int listener_d = socket (PF_INET, SOCK_STREAM, 0);
   struct sockaddr_in name;
+
+  /* set socket can be resue */
+  int reuse = 1;
+  if (setsockopt(listener_d, SOL_SOCKET, SO_REUSEADDR, (char*)&reuse, sizeof(int)) == -1)
+  {
+        error("can't set socket's port-reuse option.");
+  }
+
+
   name.sin_family = PF_INET;
   name.sin_port = (in_port_t) htons (30000);
   name.sin_addr.s_addr = htonl (INADDR_ANY);
