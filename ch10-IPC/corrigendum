@@ -1,0 +1,16 @@
+void
+open_url (char *url)
+{
+  char launch[255];
+  //for windows
+  sprintf (launch, "cmd /c start %s", url);
+  system (launch);
+  //for linux
+  //
+  sprintf (launch, "x-www-browser %s &", url);
+  system (launch);
+  //for MAC
+  // the book have error, I fix it.
+  sprintf (launch, "open %s", url);
+  system (launch);
+}
