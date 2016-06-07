@@ -4,6 +4,9 @@
 #include <errno.h>
 #include <sys/wait.h>
 
+/*  other person's code
+ *
+ * */
 
 int main (int argc, char *argv[]) {
 
@@ -34,9 +37,9 @@ int main (int argc, char *argv[]) {
 	    }
 	}
     // waitpid, important setp , is this part not essential?
-    int pid_status;
-    if (waitpid(pid, &pid_status, 0) == -1) {
-        error("error occured when waiting for subprocess.");
-    }   
+    //int pid_status;
+    //if (waitpid(pid, &pid_status, 0) == -1) {
+    //    error("error occured when waiting for subprocess.");
+    //}   
     return 0;
 }
